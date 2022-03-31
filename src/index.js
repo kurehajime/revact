@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from "react-dom/client";
 import './index.css';
 
 function Stone(props) {
@@ -48,21 +48,23 @@ class Board extends React.Component {
         const COL = 8;
         const width = 500 / COL;
         return (
-            <div>
-                <svg viewBox="0 0 500 500" width="500" height="500">
-                    {this.props.stones.map((data, index) => {
-                        const x = (index % COL) | 0;
-                        const y = (index / COL) | 0;
-                        return <Stone
-                            key={index}
-                            color={data}
-                            width={width}
-                            x={x}
-                            y={y}
-                        />;
-                    })}
-                </svg>
-            </div >
+            <span id="box">
+                <div id="board" >
+                    <svg viewBox="0 0 500 500" width="500" height="500">
+                        {this.props.stones.map((data, index) => {
+                            const x = (index % COL) | 0;
+                            const y = (index / COL) | 0;
+                            return <Stone
+                                key={index}
+                                color={data}
+                                width={width}
+                                x={x}
+                                y={y}
+                            />;
+                        })}
+                    </svg>
+                </div >
+            </span>
         );
     }
 }
@@ -104,7 +106,16 @@ class Game extends React.Component {
 
 // ========================================
 
-ReactDOM.render(
-    <Game />,
-    document.getElementById('root')
+
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
+
+root.render(
+    <span>
+        <canvas id="back"></canvas>
+        <div id="app">
+            <div id="title">Revact</div>
+            <Game />
+        </div>
+    </span>
 );
