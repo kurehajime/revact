@@ -2,7 +2,7 @@ import AI from "./ai.mjs";
 import { init_state } from "./init_state.mjs";
 
 export default class GameControler {
-    static Clicked(state, selected) {
+    static Put(state, selected) {
         state = JSON.parse(JSON.stringify(state));
         if (state.winner != null) {
             state = JSON.parse(JSON.stringify(init_state));
@@ -18,6 +18,11 @@ export default class GameControler {
         state.turn = -1 * state.turn;
         state.winner = GameControler.checkWinner(state.stones);//勝敗チェック
         state.count++
+
+        return state
+    }
+    static Think(state) {
+        state = JSON.parse(JSON.stringify(state));
         if (state.winner == null) {
             while (true) {
                 if (AI.canPutPlayer(state.stones, state.turn)) {
@@ -33,8 +38,9 @@ export default class GameControler {
                 state.turn = -1 * state.turn;
             }
         }
-        return state
     }
+
+
     static checkWinner(stones) {
         if (!AI.canPutAll(stones)) {
             return AI.calcWinner(stones);
