@@ -17,12 +17,12 @@ export default class AI {
                     continue;
                 }
                 target = [];
-                L: for (let _x = x + x_inc, _y = y + y_inc; _x >= 0 & _y >= 0 && _x < this.COL && _y < this.COL; _x = _x + x_inc, _y = _y + y_inc) {
+                for (let _x = x + x_inc, _y = y + y_inc; _x >= 0 & _y >= 0 && _x < this.COL && _y < this.COL; _x = _x + x_inc, _y = _y + y_inc) {
                     if (map[_y * this.COL + _x] * turn > 0) {
                         list = list.concat(target);
-                        break L;
-                    } else if (map[_y * this.COL + _x] == 0) {
-                        break L;
+                        break;
+                    } else if (map[_y * this.COL + _x] === 0) {
+                        break;
                     } else {
                         target.push(_y * this.COL + _x);
                     }
@@ -36,7 +36,7 @@ export default class AI {
         let x = (number % this.COL) | 0;
         let y = (number / this.COL) | 0;
         let target = [];
-        if (map[number] != 0) {
+        if (map[number] !== 0) {
             return false;
         }
         for (let x_inc = -1; x_inc <= 1; x_inc++) {
@@ -45,14 +45,14 @@ export default class AI {
                     continue;
                 }
                 target = [];
-                L: for (let _x = x + x_inc, _y = y + y_inc; _x >= 0 & _y >= 0 && _x < this.COL && _y < this.COL; _x = _x + x_inc, _y = _y + y_inc) {
+                for (let _x = x + x_inc, _y = y + y_inc; _x >= 0 & _y >= 0 && _x < this.COL && _y < this.COL; _x = _x + x_inc, _y = _y + y_inc) {
                     if (map[_y * this.COL + _x] * turn > 0) {
                         if (target.length > 0) {
                             return true;
                         }
-                        break L;
-                    } else if (map[_y * this.COL + _x] == 0) {
-                        break L;
+                        break;
+                    } else if (map[_y * this.COL + _x] === 0) {
+                        break;
                     } else {
                         target.push(_y * this.COL + _x);
                     }
@@ -65,7 +65,7 @@ export default class AI {
     static canPutPlayer(map, turn) {
         let _map = map.concat();
         for (let i = 0; i < this.COLXCOL; i++) {
-            if (this.canPut(_map, i, turn) == true) {
+            if (this.canPut(_map, i, turn) === true) {
                 return true;
             }
         }
@@ -75,12 +75,12 @@ export default class AI {
     static canPutAll(map) {
         let _map = map.concat();
         for (let i = 0; i < this.COLXCOL; i++) {
-            if (this.canPut(_map, i, 1) == true) {
+            if (this.canPut(_map, i, 1) === true) {
                 return true;
             }
         }
         for (let i = 0; i < this.COLXCOL; i++) {
-            if (this.canPut(_map, i, -1) == true) {
+            if (this.canPut(_map, i, -1) === true) {
                 return true;
             }
         }
@@ -110,6 +110,8 @@ export default class AI {
                 case -1:
                     _map[_number] = +1;
                     break;
+                default:
+                    break;
             }
         }
         return _map;
@@ -126,6 +128,8 @@ export default class AI {
                 case -1:
                     ev += -1;
                     break;
+                default:
+                    break
             }
         }
         return ev;
@@ -133,7 +137,7 @@ export default class AI {
 
     static isEnd(map) {
         for (let i = 0; i < this.COLXCOL; i++) {
-            if (map[i] == 0) {
+            if (map[i] === 0) {
                 return false;
             }
         }
@@ -200,10 +204,10 @@ export default class AI {
                 best_score = sc;
                 besthand = hand;
             }
-            if (turn === 1 && a < best_score || turn === -1 && a > best_score) {
+            if ((turn === 1 && a < best_score) || (turn === -1 && a > best_score)) {
                 a = best_score;
             }
-            if (turn === 1 && b <= best_score || turn === -1 && b >= best_score) {
+            if ((turn === 1 && b <= best_score) || (turn === -1 && b >= best_score)) {
                 break;
             }
         }
