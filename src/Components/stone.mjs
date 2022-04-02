@@ -15,25 +15,30 @@ export default function Stone(props) {
             break;
     }
     return (
-        <g>
+        <g
+            onClick={() => props.onClick(props.index)}
+        >
             <rect
                 x={calcX}
                 y={calcY}
                 width={width}
                 height={width}
                 className="cell"
+                onClick={() => props.onClick(props.index)}
             />
             <circle
                 r={width / 2.6}
                 cx={(width / 2) + calcX}
                 cy={(width / 2) + calcY}
                 className={`stone ${stateClass}`}
+                onClick={() => props.onClick(props.index)}
             />
             <circle
                 r={width / 5}
                 cx={(width / 2) + calcX}
                 cy={(width / 2) + calcY}
                 className={`mark ${canPut}`}
+                onClick={() => props.onClick(props.index)}
             />
         </g>
     );

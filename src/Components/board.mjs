@@ -15,6 +15,8 @@ export default function Board(props) {
                             width={width}
                             x={x}
                             y={y}
+                            onClick={props.onClick}
+                            index={index}
                         />;
                     })}
                 </svg>

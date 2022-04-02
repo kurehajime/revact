@@ -1,32 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Board from './board.mjs';
-export default class Game extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            stones: [0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, -1, 1, 0, 0, 0,
-                0, 0, 0, 1, -1, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0,
-            ],
-            xIsNext: true
-        };
-    }
+import GameControler from '../game_controller.mjs';
+import { init_state } from '../init_state.mjs';
 
-
-    render() {
-        return (
-            <div className="game">
-                <div className="game-board">
-                    <Board
-                        stones={this.state.stones}
-                    />
-                </div>
+export default function Game(props) {
+    const [state, setState] = useState(init_state);
+    return (
+        <div className="game">
+            <div className="game-board">
+                <Board
+                    stones={state.stones}
+                    onClick={(number) => {
+                        const newState = GameControler.Clicked(state, number)
+                        setState(newState)
+                    }}
+                />
             </div>
-        );
-    }
+        </div>
+    );
+
 }
+
+
