@@ -1,4 +1,5 @@
 import Stone from './stone.mjs';
+import AI from '../ai.mjs';
 export default function Board(props) {
     const COL = 8;
     const width = 500 / COL;
@@ -9,6 +10,8 @@ export default function Board(props) {
                     {props.stones.map((data, index) => {
                         const x = (index % COL) | 0;
                         const y = (index / COL) | 0;
+                        const canPut = AI.canPut(props.stones, index, 1)
+                        const canPutStr = canPut ? "canPut" : ""
                         return <Stone
                             key={index}
                             color={data}
@@ -17,6 +20,7 @@ export default function Board(props) {
                             y={y}
                             onClick={props.onClick}
                             index={index}
+                            canPut={canPutStr}
                         />;
                     })}
                 </svg>
