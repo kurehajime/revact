@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from "react-dom/client";
 import './index.css';
 
-function Stone(props) {
+const Stone = (props) => {
     const width = props.width;
     const calcX = (props.width * props.x);
     const calcY = (props.width * props.y);
@@ -43,30 +43,28 @@ function Stone(props) {
     );
 }
 
-class Board extends React.Component {
-    render() {
-        const COL = 8;
-        const width = 500 / COL;
-        return (
-            <span id="box">
-                <div id="board" >
-                    <svg viewBox="0 0 500 500" width="500" height="500">
-                        {this.props.stones.map((data, index) => {
-                            const x = (index % COL) | 0;
-                            const y = (index / COL) | 0;
-                            return <Stone
-                                key={index}
-                                color={data}
-                                width={width}
-                                x={x}
-                                y={y}
-                            />;
-                        })}
-                    </svg>
-                </div >
-            </span>
-        );
-    }
+const Board = (props) => {
+    const COL = 8;
+    const width = 500 / COL;
+    return (
+        <span id="box">
+            <div id="board" >
+                <svg viewBox="0 0 500 500" width="500" height="500">
+                    {props.stones.map((data, index) => {
+                        const x = (index % COL) | 0;
+                        const y = (index / COL) | 0;
+                        return <Stone
+                            key={index}
+                            color={data}
+                            width={width}
+                            x={x}
+                            y={y}
+                        />;
+                    })}
+                </svg>
+            </div >
+        </span>
+    );
 }
 
 class Game extends React.Component {
