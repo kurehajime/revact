@@ -13,4 +13,5 @@ export const init_state = {
     black_score: 0,
     wait: false,
     winner: null,
+    count: 0,
 }

@@ -3,6 +3,7 @@ import { init_state } from "./init_state.mjs";
 
 export default class GameControler {
     static Clicked(state, selected) {
+        state = JSON.parse(JSON.stringify(state));
         if (state.winner != null) {
             state = JSON.parse(JSON.stringify(init_state));
             return state;
@@ -16,7 +17,7 @@ export default class GameControler {
         state.stones = AI.putMap(state.stones, selected, state.turn);
         state.turn = -1 * state.turn;
         state.winner = GameControler.checkWinner(state.stones);//勝敗チェック
-
+        state.count++
         if (state.winner == null) {
             while (true) {
                 if (AI.canPutPlayer(state.stones, state.turn)) {

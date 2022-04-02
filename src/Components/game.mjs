@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import Board from './board.mjs';
 import GameControler from '../game_controller.mjs';
 import { init_state } from '../init_state.mjs';
 
 export default function Game(props) {
-    const [state, setState] = useState(init_state);
+    const [state, dispatch] = useReducer(GameControler.Clicked, init_state);
     return (
         <div className="game">
             <div className="game-board">
                 <Board
                     stones={state.stones}
                     onClick={(number) => {
-                        const newState = GameControler.Clicked(state, number)
-                        setState(newState)
+                        dispatch(number)
                     }}
                 />
             </div>
