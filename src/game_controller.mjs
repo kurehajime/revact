@@ -5,8 +5,7 @@ export default class GameControler {
     static Put(state, selected) {
         state = JSON.parse(JSON.stringify(state));
         if (state.winner != null) {
-            state = JSON.parse(JSON.stringify(init_state));
-            return state;
+            return init_state;
         }
         if (state.turn === -1) {
             return state;
