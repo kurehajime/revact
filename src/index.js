@@ -10,7 +10,7 @@ root.render(
     <span>
         <canvas id="back"></canvas>
         <div id="app">
-            <div id="title">Revact</div>
+            <div id="title">reversi</div>
             <Game />
         </div>
     </span>
