@@ -28,15 +28,13 @@ export default function Game(props) {
                 <Board
                     stones={state.stones}
                     onClick={(number) => {
-                        if (state.turn !== -1) {
-                            const newState1 = GameControler.Put(state, number)
-                            setState(newState1)
-                            if (newState1.turn === -1) {
-                                setTimeout(() => {
-                                    const newState2 = GameControler.Think(newState1)
-                                    setState(newState2)
-                                }, 1000);
-                            }
+                        const newState1 = GameControler.Put(state, number)
+                        setState(newState1)
+                        if (newState1.turn === -1) {
+                            setTimeout(() => {
+                                const newState2 = GameControler.Think(newState1)
+                                setState(newState2)
+                            }, 1000);
                         }
                     }}
                 />
